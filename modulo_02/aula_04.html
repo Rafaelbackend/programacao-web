@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Matricula</title>
+    
+</head>
+<input>
+    <form action="/cadastro" method="post">
+        <h1>Fomulario de matricula</h1>
+        <h2>Dados pessoais</h2>
+        <label for="nome">Nome</label>
+        <input type="text" required
+        id="nome" name="nome" />
+
+        <label for="email">E-mail</label>
+        <input type="email" required
+        id="email" name="email" />
+        
+        <label for="data">Data</label>
+        <input type="date" required
+        id="data" name="Data" /><br>
+
+        <label for="cpf">CPF</label>
+        <input type="number" required
+        id="cpf" name="CPF" /><br>
+
+        <h2>Dados Acadêmicos</h2>
+        <label for="curso">Curso</label>
+        <select name="curso" id="curso">
+            <option value="">Selecione</option>
+            <option value="ads">ADS</option>
+            <option value="ciencia">Ciencia</option>
+            <option value="si">Sist. Informação</option>
+        </select><br>
+        
+        <form>
+            <input type="radio" id="manhã" name="periodo" value="manhã" checked> 
+            <label for="manhã">Manhã</label>
+        
+            <input type="radio" id="noite" name="periodo" value="noite" checked> 
+            <label for="noite">Noite</label><br>
+        </form>
+        
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #333;
+    color: white;
+    padding: 15px;
+    display: flex; 
+    gap: 15px; 
+    list-style: none;
+}
+
+main {
+    margin-top: 80px;
+    flex: 1;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+tbody {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+tbody tr {
+    display: inline-block;
+    padding: 15px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
