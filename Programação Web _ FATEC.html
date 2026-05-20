@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)https://fatec.leandromedeiros.com/ -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programação Web | FATEC</title>
+  <script src="./Programação Web _ FATEC_files/saved_resource"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="./Programação Web _ FATEC_files/css2" rel="stylesheet">
+  <link href="./Programação Web _ FATEC_files/css2(1)" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+            dark: { 50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1', 400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155', 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #020617; color: #e2e8f0; min-height: 100vh; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .bg-mesh {
+      background-image:
+        radial-gradient(at 20% 20%, rgba(99, 102, 241, 0.15) 0, transparent 50%),
+        radial-gradient(at 80% 80%, rgba(139, 92, 246, 0.1) 0, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(99, 102, 241, 0.05) 0, transparent 70%);
+    }
+    .glass { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(16px); border: 1px solid rgba(148, 163, 184, 0.1); }
+    .gradient-text { background: linear-gradient(135deg, #818cf8, #6366f1, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: translateY(0) } }
+    @keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+    .floating { animation: float 3s ease-in-out infinite; }
+    .fade-in { animation: fadeIn 0.6s ease forwards; opacity: 0; }
+    .fade-in-1 { animation-delay: 0.1s; } .fade-in-2 { animation-delay: 0.2s; } .fade-in-3 { animation-delay: 0.3s; }
+    .fade-in-4 { animation-delay: 0.4s; } .fade-in-5 { animation-delay: 0.5s; } .fade-in-6 { animation-delay: 0.6s; }
+    .fade-in-7 { animation-delay: 0.7s; } .fade-in-8 { animation-delay: 0.8s; }
+
+    .module-card { transition: all 0.3s ease; }
+    .module-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3); }
+
+    .aula-link {
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .aula-link:hover {
+      background: rgba(99, 102, 241, 0.1);
+      transform: translateX(4px);
+    }
+    .aula-link.disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .module-accent-1 { border-color: rgba(99, 102, 241, 0.5); }
+    .module-accent-1 .module-icon { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+    .module-accent-1 .module-badge { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; }
+
+    .module-accent-2 { border-color: rgba(52, 211, 153, 0.5); }
+    .module-accent-2 .module-icon { background: rgba(52, 211, 153, 0.15); color: #34d399; }
+    .module-accent-2 .module-badge { background: rgba(52, 211, 153, 0.15); color: #6ee7b7; }
+
+    .module-accent-3 { border-color: rgba(251, 191, 36, 0.5); }
+    .module-accent-3 .module-icon { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+    .module-accent-3 .module-badge { background: rgba(251, 191, 36, 0.15); color: #fcd34d; }
+
+    .module-accent-4 { border-color: rgba(244, 114, 182, 0.5); }
+    .module-accent-4 .module-icon { background: rgba(244, 114, 182, 0.15); color: #f472b6; }
+    .module-accent-4 .module-badge { background: rgba(244, 114, 182, 0.15); color: #f9a8d4; }
+
+    .module-accent-5 { border-color: rgba(56, 189, 248, 0.5); }
+    .module-accent-5 .module-icon { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+    .module-accent-5 .module-badge { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; }
+
+    .module-accent-6 { border-color: rgba(248, 113, 113, 0.5); }
+    .module-accent-6 .module-icon { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+    .module-accent-6 .module-badge { background: rgba(248, 113, 113, 0.15); color: #fca5a5; }
+
+    .module-accent-7 { border-color: rgba(167, 139, 250, 0.5); }
+    .module-accent-7 .module-icon { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+    .module-accent-7 .module-badge { background: rgba(167, 139, 250, 0.15); color: #c4b5fd; }
+
+    .module-accent-8 { border-color: rgba(45, 212, 191, 0.5); }
+    .module-accent-8 .module-icon { background: rgba(45, 212, 191, 0.15); color: #2dd4bf; }
+    .module-accent-8 .module-badge { background: rgba(45, 212, 191, 0.15); color: #5eead4; }
+
+    .aula-number { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Inter, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.mx-auto{margin-left:auto;margin-right:auto}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.ml-auto{margin-left:auto}.mt-6{margin-top:1.5rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.h-1{height:0.25rem}.h-10{height:2.5rem}.h-2{height:0.5rem}.w-1{width:0.25rem}.w-10{width:2.5rem}.w-2{width:0.5rem}.min-w-0{min-width:0px}.max-w-2xl{max-width:42rem}.max-w-4xl{max-width:56rem}.max-w-6xl{max-width:72rem}.flex-1{flex:1 1 0%}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.items-center{align-items:center}.justify-center{justify-content:center}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-6{gap:1.5rem}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border-l-4{border-left-width:4px}.border-t{border-top-width:1px}.border-dark-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.bg-dark-600{--tw-bg-opacity:1;background-color:rgb(71 85 105 / var(--tw-bg-opacity, 1))}.bg-green-400{--tw-bg-opacity:1;background-color:rgb(74 222 128 / var(--tw-bg-opacity, 1))}.p-2\.5{padding:0.625rem}.p-6{padding:1.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.pb-20{padding-bottom:5rem}.text-center{text-align:center}.text-5xl{font-size:3rem;line-height:1}.text-\[10px\]{font-size:10px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.leading-tight{line-height:1.25}.text-brand-300{--tw-text-opacity:1;color:rgb(165 180 252 / var(--tw-text-opacity, 1))}.text-dark-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-dark-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-dark-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:py-20{padding-top:5rem;padding-bottom:5rem}.md\:text-7xl{font-size:4.5rem;line-height:1}.md\:text-xl{font-size:1.25rem;line-height:1.75rem}}</style></head>
+
+<body class="bg-mesh">
+
+  <!-- Header -->
+  <header class="py-12 md:py-20 text-center px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="floating mb-6 inline-flex items-center gap-2 glass rounded-full px-5 py-2 text-sm text-brand-300">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        FATEC / ADS / 1o Semestre 2026
+      </div>
+      <h1 class="text-5xl md:text-7xl font-black mb-4 leading-tight fade-in fade-in-1">
+        Programação <span class="gradient-text">Web</span>
+      </h1>
+      <p class="text-lg md:text-xl text-dark-400 max-w-2xl mx-auto fade-in fade-in-2">
+        40 aulas, 80 horas. Do HTML ao deploy de uma aplicação full-stack.
+      </p>
+      <div class="flex items-center justify-center gap-6 text-sm text-dark-500 mt-6 fade-in fade-in-3">
+        <span class="flex items-center gap-1.5"><span class="material-symbols-outlined" style="font-size:18px;">person</span> Prof. Leandro</span>
+        <span class="w-1 h-1 rounded-full bg-dark-600"></span>
+        <span class="flex items-center gap-1.5"><span class="material-symbols-outlined" style="font-size:18px;">schedule</span> 80h</span>
+        <span class="w-1 h-1 rounded-full bg-dark-600"></span>
+        <span class="flex items-center gap-1.5"><span class="material-symbols-outlined" style="font-size:18px;">view_module</span> 8 módulos</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Modules Grid -->
+  <main class="max-w-6xl mx-auto px-6 pb-20">
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Módulo 1 -->
+      <div class="glass rounded-2xl p-6 module-card module-accent-1 border-l-4 fade-in fade-in-1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="module-icon w-10 h-10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined" style="font-size:22px;">waving_hand</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-sm">Módulo 1</h2>
+            <p class="text-dark-500 text-xs">Apresentação e Ambiente</p>
+          </div>
+          <span class="module-badge text-[10px] font-semibold rounded-full px-2.5 py-0.5 ml-auto">1 aula</span>
+        </div>
+        <div class="space-y-1">
+          <a href="https://fatec.leandromedeiros.com/aula-01-apresentacao/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">01</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Apresentação</span>
+              <span class="text-dark-500 text-xs block truncate">Disciplina, professor, ferramentas e ambiente</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo 2 -->
+      <div class="glass rounded-2xl p-6 module-card module-accent-2 border-l-4 fade-in fade-in-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="module-icon w-10 h-10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined" style="font-size:22px;">code</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-sm">Módulo 2</h2>
+            <p class="text-dark-500 text-xs">HTML &amp; CSS</p>
+          </div>
+          <span class="module-badge text-[10px] font-semibold rounded-full px-2.5 py-0.5 ml-auto">10 aulas</span>
+        </div>
+        <div class="space-y-1">
+          <a href="https://fatec.leandromedeiros.com/aula-02-introducao-web-html/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">02</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Introdução à Web e HTML</span>
+              <span class="text-dark-500 text-xs block truncate">Estrutura HTML, tags semânticas</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-03-textos-listas-links-imagens-tabelas/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">03</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Textos, listas, links, imagens e tabelas</span>
+              <span class="text-dark-500 text-xs block truncate">Elementos de conteúdo HTML</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-04-formularios-html/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">04</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Formulários HTML</span>
+              <span class="text-dark-500 text-xs block truncate">Inputs, validações, acessibilidade</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-05-introducao-css/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">05</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Introdução ao CSS</span>
+              <span class="text-dark-500 text-xs block truncate">Seletores, propriedades, cascata</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-06-box-model-display-posicionamento/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">06</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Box Model, Display e Posicionamento</span>
+              <span class="text-dark-500 text-xs block truncate">Box Model, display, position</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-07-flexbox/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">07</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Flexbox</span>
+              <span class="text-dark-500 text-xs block truncate">Layouts flexíveis</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-08-css-grid/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">08</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">CSS Grid</span>
+              <span class="text-dark-500 text-xs block truncate">Layouts avançados</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-09-responsividade/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">09</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Responsividade</span>
+              <span class="text-dark-500 text-xs block truncate">Media queries, mobile-first</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-10-animacoes-transicoes-css/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">10</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Animações e Transições CSS</span>
+              <span class="text-dark-500 text-xs block truncate">Transições, @keyframes, performance</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-11-projeto-pratico-landing-page/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">11</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Projeto Prático: Landing Page</span>
+              <span class="text-dark-500 text-xs block truncate">Landing page responsiva + portfólio pessoal</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo 3 -->
+      <div class="glass rounded-2xl p-6 module-card module-accent-3 border-l-4 fade-in fade-in-3">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="module-icon w-10 h-10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined" style="font-size:22px;">javascript</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-sm">Módulo 3</h2>
+            <p class="text-dark-500 text-xs">JavaScript</p>
+          </div>
+          <span class="module-badge text-[10px] font-semibold rounded-full px-2.5 py-0.5 ml-auto">6 aulas</span>
+        </div>
+        <div class="space-y-1">
+          <a href="https://fatec.leandromedeiros.com/aula-12-fundamentos-javascript/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">12</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Fundamentos JavaScript</span>
+              <span class="text-dark-500 text-xs block truncate">Variáveis, tipos, operadores</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-13-estruturas-controle-funcoes-arrays-objetos/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">13</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Controle, Funções, Arrays e Objetos</span>
+              <span class="text-dark-500 text-xs block truncate">Estruturas de controle, funções</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-14-dom/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">14</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">DOM</span>
+              <span class="text-dark-500 text-xs block truncate">Seleção, manipulação e criação de elementos</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-15-eventos/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">15</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Eventos</span>
+              <span class="text-dark-500 text-xs block truncate">Click, submit, input, delegação</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-16-fetch-api/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">16</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Fetch API</span>
+              <span class="text-dark-500 text-xs block truncate">Consumo de APIs externas, async/await</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-17-projeto-pratico-app-interativa/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">17</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Projeto Prático: App Interativa</span>
+              <span class="text-dark-500 text-xs block truncate">Lista de tarefas, quiz</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo 4 -->
+      <div class="glass rounded-2xl p-6 module-card module-accent-4 border-l-4 fade-in fade-in-4">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="module-icon w-10 h-10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined" style="font-size:22px;">commit</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-sm">Módulo 4</h2>
+            <p class="text-dark-500 text-xs">Git &amp; GitHub</p>
+          </div>
+          <span class="module-badge text-[10px] font-semibold rounded-full px-2.5 py-0.5 ml-auto">4 aulas</span>
+        </div>
+        <div class="space-y-1">
+          <a href="https://fatec.leandromedeiros.com/aula-18-conceitos-versionamento-git/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">18</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Conceitos de Versionamento</span>
+              <span class="text-dark-500 text-xs block truncate">Instalação e configuração do Git</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-19-commits-branches-merge/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">19</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Commits, Branches e Merge</span>
+              <span class="text-dark-500 text-xs block truncate">Resolução de conflitos</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-20-github-repositorios-remotos/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">20</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">GitHub: Repositórios Remotos</span>
+              <span class="text-dark-500 text-xs block truncate">Push, pull, pull requests</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-21-colaboracao-github-pages/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">21</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Colaboração em Equipe</span>
+              <span class="text-dark-500 text-xs block truncate">GitHub Pages para deploy</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo 5 -->
+      <div class="glass rounded-2xl p-6 module-card module-accent-5 border-l-4 fade-in fade-in-5">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="module-icon w-10 h-10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined" style="font-size:22px;">cloud_upload</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-sm">Módulo 5</h2>
+            <p class="text-dark-500 text-xs">Arquitetura Web &amp; Deploy</p>
+          </div>
+          <span class="module-badge text-[10px] font-semibold rounded-full px-2.5 py-0.5 ml-auto">4 aulas</span>
+        </div>
+        <div class="space-y-1">
+          <a href="https://fatec.leandromedeiros.com/aula-22-como-funciona-a-web/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">22</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Como Funciona a Web</span>
+              <span class="text-dark-500 text-xs block truncate">HTTP, DNS, cliente-servidor</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-23-servidores-web-hospedagem/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">23</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Servidores Web</span>
+              <span class="text-dark-500 text-xs block truncate">Hospedagem, ambientes</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-24-deploy-vercel/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">24</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Deploy: Vercel e Netlify</span>
+              <span class="text-dark-500 text-xs block truncate">Deploy de front-end</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-25-dominios-ssl-seguranca/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">25</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Domínios, SSL e Segurança</span>
+              <span class="text-dark-500 text-xs block truncate">SSL/TLS, boas práticas</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo 6 -->
+      <div class="glass rounded-2xl p-6 module-card module-accent-6 border-l-4 fade-in fade-in-6">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="module-icon w-10 h-10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined" style="font-size:22px;">dns</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-sm">Módulo 6</h2>
+            <p class="text-dark-500 text-xs">Back-End com Node.js</p>
+          </div>
+          <span class="module-badge text-[10px] font-semibold rounded-full px-2.5 py-0.5 ml-auto">5 aulas</span>
+        </div>
+        <div class="space-y-1">
+          <a href="https://fatec.leandromedeiros.com/aula-26-introducao-nodejs/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">26</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Introdução ao Node.js</span>
+              <span class="text-dark-500 text-xs block truncate">npm, módulos</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-27-express-rotas-middleware/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">27</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Express.js</span>
+              <span class="text-dark-500 text-xs block truncate">Rotas, middleware, MVC</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-28-mongodb/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">28</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">MongoDB</span>
+              <span class="text-dark-500 text-xs block truncate">Conceitos, CRUD</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-29-express-mongodb-mongoose/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">29</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Express + MongoDB</span>
+              <span class="text-dark-500 text-xs block truncate">Mongoose, integração</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-30-autenticacao-jwt/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">30</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Autenticação</span>
+              <span class="text-dark-500 text-xs block truncate">JWT, sessões</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo 7 -->
+      <div class="glass rounded-2xl p-6 module-card module-accent-7 border-l-4 fade-in fade-in-7">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="module-icon w-10 h-10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined" style="font-size:22px;">api</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-sm">Módulo 7</h2>
+            <p class="text-dark-500 text-xs">APIs REST</p>
+          </div>
+          <span class="module-badge text-[10px] font-semibold rounded-full px-2.5 py-0.5 ml-auto">4 aulas</span>
+        </div>
+        <div class="space-y-1">
+          <a href="https://fatec.leandromedeiros.com/aula-31-conceitos-rest/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">31</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Conceitos REST</span>
+              <span class="text-dark-500 text-xs block truncate">Métodos HTTP, status codes</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-32-api-restful-completa/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">32</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">API RESTful Completa</span>
+              <span class="text-dark-500 text-xs block truncate">Criando uma API do zero</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-33-frontend-consumindo-api/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">33</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Integração Full-Stack</span>
+              <span class="text-dark-500 text-xs block truncate">Front-end consumindo API própria</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-34-documentacao-testes-api/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">34</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Documentação e Testes</span>
+              <span class="text-dark-500 text-xs block truncate">Postman, Insomnia</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo 8 -->
+      <div class="glass rounded-2xl p-6 module-card module-accent-8 border-l-4 fade-in fade-in-8">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="module-icon w-10 h-10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined" style="font-size:22px;">rocket_launch</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-sm">Módulo 8</h2>
+            <p class="text-dark-500 text-xs">Projeto Integrador</p>
+          </div>
+          <span class="module-badge text-[10px] font-semibold rounded-full px-2.5 py-0.5 ml-auto">6 aulas</span>
+        </div>
+        <div class="space-y-1">
+          <a href="https://fatec.leandromedeiros.com/aula-35-projeto-integrador/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">35</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Definição e Planejamento</span>
+              <span class="text-dark-500 text-xs block truncate">Escopo, equipes, planejamento</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-36-37-desenvolvimento-mentoria/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">36</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Desenvolvimento com Mentoria</span>
+              <span class="text-dark-500 text-xs block truncate">Aulas 36 e 37</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-38-39-desenvolvimento-code-review/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">38</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Desenvolvimento + Code Review</span>
+              <span class="text-dark-500 text-xs block truncate">Aulas 38 e 39</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+          <a href="https://fatec.leandromedeiros.com/aula-40-apresentacao-final/index.html" class="aula-link flex items-center gap-3 p-2.5 rounded-xl">
+            <div class="aula-number module-icon">40</div>
+            <div class="flex-1 min-w-0">
+              <span class="text-sm font-medium">Apresentação Final</span>
+              <span class="text-dark-500 text-xs block truncate">Apresentação dos projetos</span>
+            </div>
+            <span class="material-symbols-outlined text-dark-600" style="font-size:18px;">chevron_right</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-10 px-6 border-t border-dark-800">
+    <p class="text-dark-500 text-sm">FATEC / Análise e Desenvolvimento de Sistemas / 2026</p>
+  </footer>
+
+<a href="https://www.linkedin.com/in/leandro-medeiros/" target="_blank" style="position:fixed;bottom:8px;right:16px;z-index:100;font-family:Inter,sans-serif;font-size:11px;color:rgba(148,163,184,.35);text-decoration:none;letter-spacing:.5px;transition:color .2s;" onmouseenter="this.style.color=&#39;rgba(129,140,248,.7)&#39;" onmouseleave="this.style.color=&#39;rgba(148,163,184,.35)&#39;">Leandro Medeiros</a>
+
+
+
+</body></html>

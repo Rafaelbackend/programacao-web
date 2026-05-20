@@ -1,0 +1,35 @@
+body {
+  font-family: Arial;
+  background: #111;
+  color: white;
+  padding: 20px;
+}
+
+h1, h2 {
+  color: orange;
+}
+
+.item {
+  border: 1px solid #444;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+input {
+  width: 60px;
+  margin-left: 10px;
+}
+
+#adicionais label {
+  display: block;
+}
+
+button {
+  background: orange;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
