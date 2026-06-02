@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    button {
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .correct {
+      background: green;
+    }
+
+    .wrong {
+      background: red;
+    }
+
+    .progress {
+      height: 10px;
+      background: #444;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #00ffcc;
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Quiz</h1>
+
+  <select id="category">
+    <option value="9">Conhecimentos Gerais</option>
+    <option value="18">Computação</option>
+  </select>
+
+  <select id="difficulty">
+    <option value="easy">Fácil</option>
+    <option value="medium">Médio</option>
+    <option value="hard">Difícil</option>
+  </select>
+
+  <br><br>
+
+  <button onclick="startQuiz()">Iniciar</button>
+
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <p id="timer"></p>
+  <p id="status"></p>
+
+  <h2 id="question"></h2>
+  <div id="answers"></div>
+
+  <h3 id="result"></h3>
+
+</div>
+
+<script>
+let questions = [];
+let current = 0;
+let score = 0;
+let timer;
+let timeLeft = 10;
+
+// 🔹 Tradução
+async function traduzir(texto) {
+  const res = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(texto) + "&langpair=en|pt");
+  const data = await res.json();
+  return data.responseData.translatedText;
+}
+
+async function startQuiz() {
+  const category = document.getElementById("category").value;
+  const difficulty = document.getElementById("difficulty").value;
+
+  document.getElementById("status").textContent = "Carregando perguntas...";
+
+  const res = await fetch(`https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=multiple`);
+  const data = await res.json();
+
+  questions = data.results;
+  current = 0;
+  score = 0;
+
+  document.getElementById("status").textContent = "";
+
+  showQuestion();
+}
+
+async function showQuestion() {
+  clearInterval(timer);
+  timeLeft = 10;
+  updateTimer();
+
+  const q = questions[current];
+
+  document.getElementById("status").textContent = "Traduzindo...";
+
+  const perguntaTraduzida = await traduzir(q.question);
+  document.getElementById("question").innerHTML = perguntaTraduzida;
+
+  const answers = [...q.incorrect_answers, q.correct_answer].sort();
+  const div = document.getElementById("answers");
+  div.innerHTML = "";
+
+  for (let answer of answers) {
+    const respostaTraduzida = await traduzir(answer);
+
+    const btn = document.createElement("button");
+    btn.innerHTML = respostaTraduzida;
+
+    btn.onclick = () => answerQuestion(btn, answer === q.correct_answer);
+
+    div.appendChild(btn);
+  }
+
+  document.getElementById("status").textContent = "";
+
+  updateProgress();
+  startTimer();
+}
+
+function answerQuestion(button, isCorrect) {
+  clearInterval(timer);
+
+  if (isCorrect) {
+    button.classList.add("correct");
+    score++;
+  } else {
+    button.classList.add("wrong");
+  }
+
+  setTimeout(() => {
+    current++;
+    if (current < questions.length) {
+      showQuestion();
+    } else {
+      finishQuiz();
+    }
+  }, 1000);
+}
+
+function finishQuiz() {
+  document.getElementById("result").textContent =
+    `Pontuação: ${score}`;
+
+  const highScore = localStorage.getItem("recorde") || 0;
+
+  if (score > highScore) {
+    localStorage.setItem("recorde", score);
+    document.getElementById("result").textContent += " 🏆 Novo recorde!";
+  }
+}
+
+function updateProgress() {
+  const progress = ((current + 1) / questions.length) * 100;
+  document.getElementById("progressBar").style.width = progress + "%";
+}
+
+function startTimer() {
+  timer = setInterval(() => {
+    timeLeft--;
+    updateTimer();
+
+    if (timeLeft === 0) {
+      clearInterval(timer);
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+  }, 1000);
+}
+
+function updateTimer() {
+  document.getElementById("timer").textContent =
+    `Tempo: ${timeLeft}s`;
+}
+</script>
+
+</body>
+</html>

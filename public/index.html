@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Produtos</h1>
+    <section>
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="senha" placeholder="Senha">
+            <button type="submit">
+                Login
+            </button>
+        </form>
+    </section>
+    <hr>
+    <section>
+        <h2>Cadastrar Produto</h2>
+        <form id="produtoForm">
+            <input type="text" id="nome" placeholder="Nome">
+            <input type="number" id="preco" placeholder="Preço">
+            <input type="text" id="categoria" placeholder="Categoria">
+            <button type="submit">
+                Cadastrar
+            </button>
+        </form>
+    </section>
+    <hr>
+    <section>
+        <h2>Filtro</h2>
+        <select id="filtroCategoria">
+            <option value="">Todas</option>
+        </select>
+    </section>
+    <hr>
+    <section>
+        <h2>Lista de Produtos</h2>
+        <div id="listaProdutos"></div>
+    </section>
+    <script src="js/app.js"></script>
+</body>
+</html>

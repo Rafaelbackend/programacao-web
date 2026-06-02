@@ -1,0 +1,2 @@
+Soma: 8
+Multiplicação: 15

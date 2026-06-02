@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Tarefas</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+
+    li {
+      cursor: pointer;
+      margin: 5px 0;
+    }
+
+    .done {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    button.remove {
+      margin-left: 10px;
+      color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lista de Tarefas</h1>
+
+  <form id="form">
+    <input type="text" id="tarefaInput" placeholder="Digite uma tarefa">
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <br>
+
+  <input type="text" id="busca" placeholder="Buscar tarefa...">
+
+  <ul id="lista"></ul>
+
+  <script>
+    const form = document.getElementById("form");
+    const input = document.getElementById("tarefaInput");
+    const lista = document.getElementById("lista");
+    const busca = document.getElementById("busca");
+
+    let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+
+    function salvar() {
+      localStorage.setItem("tarefas", JSON.stringify(tarefas));
+    }
+
+    function criarItem(tarefa, index) {
+      const li = document.createElement("li");
+
+      li.textContent = tarefa.texto;
+
+      if (tarefa.concluida) {
+        li.classList.add("done");
+      }
+
+      const btn = document.createElement("button");
+      btn.textContent = "X";
+      btn.classList.add("remove");
+      btn.dataset.index = index;
+
+      li.appendChild(btn);
+      lista.appendChild(li);
+    }
+
+    function render() {
+      lista.innerHTML = "";
+      tarefas.forEach((tarefa, index) => {
+        criarItem(tarefa, index);
+      });
+    }
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const texto = input.value.trim();
+      if (!texto) return;
+
+      tarefas.push({ texto, concluida: false });
+      salvar();
+      render();
+
+      input.value = "";
+    });
+
+    lista.addEventListener("click", function(e) {
+      const index = e.target.dataset.index;
+
+      if (e.target.classList.contains("remove")) {
+        tarefas.splice(index, 1);
+      } else if (e.target.tagName === "LI") {
+        tarefas[index].concluida = !tarefas[index].concluida;
+      }
+
+      salvar();
+      render();
+    });
+
+    busca.addEventListener("input", function() {
+      const termo = busca.value.toLowerCase();
+      const itens = document.querySelectorAll("li");
+
+      itens.forEach(li => {
+        const texto = li.firstChild.textContent.toLowerCase();
+        li.style.display = texto.includes(termo) ? "" : "none";
+      });
+    });
+
+    render();
+  </script>
+
+</body>
+</html>

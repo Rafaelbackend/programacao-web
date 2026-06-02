@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Produtos</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+
+    #container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 150px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lista de Produtos</h1>
+
+  <button onclick="filtrarEletronicos()">Mostrar só eletrônicos</button>
+  <button onclick="limpar()">Limpar</button>
+
+  <br><br>
+
+  <input type="text" id="nome" placeholder="Nome">
+  <input type="number" id="preco" placeholder="Preço">
+  <input type="text" id="categoria" placeholder="Categoria">
+  <button onclick="adicionarProduto()">Adicionar</button>
+
+  <div id="container"></div>
+
+  <script>
+    const container = document.getElementById("container");
+
+    const produtos = [
+      { nome: "Celular", preco: 1500, categoria: "eletronico" },
+      { nome: "Camiseta", preco: 50, categoria: "roupa" },
+      { nome: "Notebook", preco: 3000, categoria: "eletronico" },
+      { nome: "Tênis", preco: 200, categoria: "calcado" },
+      { nome: "Fone de ouvido", preco: 100, categoria: "eletronico" }
+    ];
+
+    function criarCard(produto) {
+      const card = document.createElement("div");
+      card.classList.add("card");
+
+      if (produto.categoria === "eletronico") {
+        card.classList.add("eletronico");
+      }
+
+      card.innerHTML = `
+        <h3>${produto.nome}</h3>
+        <p>Preço: R$ ${produto.preco.toFixed(2)}</p>
+        <p>Categoria: ${produto.categoria}</p>
+      `;
+
+      container.appendChild(card);
+    }
+
+    produtos.forEach(produto => criarCard(produto));
+
+    function filtrarEletronicos() {
+      const cards = document.querySelectorAll(".card");
+
+      cards.forEach(card => {
+        if (!card.classList.contains("eletronico")) {
+          card.classList.toggle("hidden");
+        }
+      });
+    }
+
+    function limpar() {
+      container.innerHTML = "";
+    }
+
+    function adicionarProduto() {
+      const nome = document.getElementById("nome").value;
+      const preco = parseFloat(document.getElementById("preco").value);
+      const categoria = document.getElementById("categoria").value.toLowerCase();
+
+      if (!nome || isNaN(preco) || !categoria) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      const novoProduto = { nome, preco, categoria };
+      criarCard(novoProduto);
+
+      document.getElementById("nome").value = "";
+      document.getElementById("preco").value = "";
+      document.getElementById("categoria").value = "";
+    }
+  </script>
+
+</body>
+</html>

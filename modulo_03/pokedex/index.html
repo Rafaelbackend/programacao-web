@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokédex</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    input {
+      padding: 8px;
+      width: 200px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    #card {
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+      color: white;
+      display: none;
+    }
+
+    img {
+      width: 120px;
+    }
+
+    .stats {
+      text-align: left;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pokédex</h1>
+
+  <input type="text" id="input" placeholder="Nome ou número">
+  <button onclick="buscar()">Buscar</button>
+
+  <br>
+
+  <button onclick="anterior()">⬅️ Anterior</button>
+  <button onclick="proximo()">Próximo ➡️</button>
+
+  <p id="status"></p>
+
+  <div id="card">
+    <h2 id="nome"></h2>
+    <img id="imagem">
+    <p id="tipos"></p>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <script>
+    let currentId = 1;
+
+    const cores = {
+      fire: "#F08030",
+      water: "#6890F0",
+      grass: "#78C850",
+      electric: "#F8D030",
+      psychic: "#F85888",
+      ice: "#98D8D8",
+      dragon: "#7038F8",
+      dark: "#705848",
+      fairy: "#EE99AC",
+      normal: "#A8A878",
+      fighting: "#C03028",
+      flying: "#A890F0",
+      poison: "#A040A0",
+      ground: "#E0C068",
+      rock: "#B8A038",
+      bug: "#A8B820",
+      ghost: "#705898",
+      steel: "#B8B8D0"
+    };
+
+    async function buscarPokemon(valor) {
+      const status = document.getElementById("status");
+      const card = document.getElementById("card");
+
+      status.textContent = "Carregando...";
+      card.style.display = "none";
+
+      try {
+        const resposta = await fetch(`https://pokeapi.co/api/v2/pokemon/${valor.toLowerCase()}`);
+        
+        if (!resposta.ok) throw new Error("Não encontrado");
+
+        const data = await resposta.json();
+
+        currentId = data.id;
+
+        document.getElementById("nome").textContent = data.name.toUpperCase();
+        document.getElementById("imagem").src = data.sprites.front_default;
+
+        const tipos = data.types.map(t => t.type.name);
+        document.getElementById("tipos").textContent = "Tipo: " + tipos.join(", ");
+
+        card.style.background = cores[tipos[0]] || "#777";
+
+        const statsDiv = document.getElementById("stats");
+        statsDiv.innerHTML = "";
+        data.stats.forEach(s => {
+          statsDiv.innerHTML += `<p>${s.stat.name}: ${s.base_stat}</p>`;
+        });
+
+        status.textContent = "";
+        card.style.display = "block";
+
+      } catch (erro) {
+        status.textContent = "Pokémon não encontrado 😢";
+      }
+    }
+
+    function buscar() {
+      const valor = document.getElementById("input").value;
+      if (valor) buscarPokemon(valor);
+    }
+
+    function anterior() {
+      if (currentId > 1) {
+        buscarPokemon(currentId - 1);
+      }
+    }
+
+    function proximo() {
+      buscarPokemon(currentId + 1);
+    }
+  </script>
+
+</body>
+</html>
